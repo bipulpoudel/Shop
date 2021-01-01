@@ -6,6 +6,8 @@ import {
   REMOVE_CART_ITEM,
 } from "../types";
 
+import { toast } from "react-toastify";
+
 export const addToCart = (product) => (dispatch) => {
   dispatch({ type: CART_REQUEST });
 
@@ -13,6 +15,8 @@ export const addToCart = (product) => (dispatch) => {
     type: ADD_TO_CART,
     payload: product,
   });
+
+  toast.success(`${product?.name} added to cart!`);
 };
 
 export const increaseCartQty = (productId) => (dispatch) => {
