@@ -1,8 +1,8 @@
 import React from "react";
 
 //TODO: after redux validation for the loading
-const MainLayout = ({ children }) => {
+const AuthLayout = ({ children }) => {
   return <>{children}</>;
 };
 
-export default MainLayout;
+export default AuthLayout;

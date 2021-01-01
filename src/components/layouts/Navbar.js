@@ -43,7 +43,11 @@ export default function Navbar(props) {
                 Ecommerce
               </Typography>
               <div className={classes.buttonGroup}>
-                <Button color="secondary" variant="contained">
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  href="/auth/login"
+                >
                   Login
                 </Button>
                 <Button
