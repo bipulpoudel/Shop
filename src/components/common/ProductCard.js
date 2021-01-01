@@ -20,6 +20,7 @@ import {
   addToCart,
   decreaseCartQty,
   increaseCartQty,
+  removeItem,
 } from "../../redux/actions/cartActions";
 import useFetchProductQuantity from "../../hooks/useFetchProductQuantity";
 
@@ -54,7 +55,11 @@ export default function ProductCard({ data: { id, name, price, image } }) {
   };
 
   const decreaseCartQtyHandler = () => {
-    dispatch(decreaseCartQty(id));
+    if (quantity === 1) {
+      dispatch(removeItem(id));
+    } else {
+      dispatch(decreaseCartQty(id));
+    }
   };
 
   return (
