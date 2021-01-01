@@ -3,6 +3,7 @@ import {
   ADD_TO_CART,
   INCREASE_CART_QTY,
   DECREASE_CART_QTY,
+  REMOVE_CART_ITEM,
 } from "../types";
 
 export const addToCart = (product) => (dispatch) => {
@@ -28,6 +29,15 @@ export const decreaseCartQty = (productId) => (dispatch) => {
 
   dispatch({
     type: DECREASE_CART_QTY,
+    payload: productId,
+  });
+};
+
+export const removeItem = (productId) => (dispatch) => {
+  dispatch({ type: CART_REQUEST });
+
+  dispatch({
+    type: REMOVE_CART_ITEM,
     payload: productId,
   });
 };
