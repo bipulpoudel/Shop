@@ -5,11 +5,16 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import App from "./App";
 import theme from "./constants/theme";
 
+//redux imports
+import store from "./redux/store";
+import { Provider } from "react-redux";
+
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-    <CssBaseline />
-    <App />
-  </ThemeProvider>,
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </Provider>,
   document.querySelector("#root")
 );
