@@ -11,6 +11,16 @@ import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+//redux imports
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  decreaseCartQty,
+  increaseCartQty,
+} from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles({
   media: {
@@ -18,11 +28,39 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProductCard({ data: { name, price, image } }) {
+export default function ProductCard({ data: { id, name, price, image } }) {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+  const { cartItems, loading } = useSelector((state) => state.cart);
+
+  const quantity = cartItems?.find((item) => item.id === id)
+    ? cartItems.find((item) => item.id === id).quantity
+    : 0;
+
+  const addToCartHandler = () => {
+    let product = {
+      id,
+      name,
+      price,
+      image,
+      quantity: 1,
+    };
+
+    dispatch(addToCart(product));
+  };
+
+  const increaseCartQtyHandler = () => {
+    dispatch(increaseCartQty(id));
+  };
+
+  const decreaseCartQtyHandler = () => {
+    dispatch(decreaseCartQty(id));
+  };
 
   return (
     <Card elevation={4}>
+      {loading && <LinearProgress color="secondary" />}
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -44,25 +82,44 @@ export default function ProductCard({ data: { name, price, image } }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
-          size="small"
-          color="secondary"
-          variant="contained"
-          startIcon={<ShoppingBasket />}
-        >
-          Cart
-        </Button>
-
-        <ButtonGroup
-          size="small"
-          color="secondary"
-          variant="contained"
-          aria-label="small outlined button group"
-        >
-          <Button startIcon={<AddIcon />} />
-          <Button>9</Button>
-          <Button startIcon={<RemoveIcon />} />
-        </ButtonGroup>
+        {quantity > 0 ? (
+          <>
+            {loading ? (
+              <CircularProgress color="secondary" size={22} />
+            ) : (
+              <ButtonGroup
+                size="small"
+                color="secondary"
+                variant="contained"
+                aria-label="small outlined button group"
+              >
+                <Button
+                  startIcon={<AddIcon />}
+                  onClick={increaseCartQtyHandler}
+                />
+                <Button>{quantity}</Button>
+                <Button
+                  startIcon={<RemoveIcon />}
+                  onClick={decreaseCartQtyHandler}
+                />
+              </ButtonGroup>
+            )}
+          </>
+        ) : (
+          <Button
+            size="small"
+            color="secondary"
+            variant="contained"
+            startIcon={<ShoppingBasket />}
+            onClick={addToCartHandler}
+          >
+            {loading ? (
+              <CircularProgress color="inherit" size={22} />
+            ) : (
+              "Add to Cart"
+            )}
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
