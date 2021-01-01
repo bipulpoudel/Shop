@@ -8,7 +8,7 @@ const MainLayout = ({ children }) => {
     <div>
       <Navbar />
       <Container maxWidth="lg">
-        <Box my={3}>{children}</Box>
+        <Box my={10}>{children}</Box>
       </Container>
     </div>
   );

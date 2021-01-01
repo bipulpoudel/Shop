@@ -9,6 +9,7 @@ import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import Badge from "@material-ui/core/Badge";
 import useFetchCartQuantity from "../../hooks/useFetchCartQuantity";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ElevationScroll from "./ElevationScroll";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,44 +28,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar(props) {
   const classes = useStyles();
 
   const [quantity, loading] = useFetchCartQuantity();
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Container maxWidth="lg">
-          <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              Ecommerce
-            </Typography>
-            <div className={classes.buttonGroup}>
-              <Button color="secondary" variant="contained">
-                Login
-              </Button>
-              <Button
-                color="inherit"
-                className={classes.button}
-                startIcon={
-                  <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={22} />
-                    ) : (
-                      <Badge badgeContent={quantity} color="secondary">
-                        <ShoppingBasket />
-                      </Badge>
-                    )}
-                  </>
-                }
-              >
-                Cart
-              </Button>
-            </div>
-          </Toolbar>
-        </Container>
-      </AppBar>
+      <ElevationScroll {...props}>
+        <AppBar>
+          <Container maxWidth="lg">
+            <Toolbar>
+              <Typography variant="h6" className={classes.title}>
+                Ecommerce
+              </Typography>
+              <div className={classes.buttonGroup}>
+                <Button color="secondary" variant="contained">
+                  Login
+                </Button>
+                <Button
+                  color="inherit"
+                  className={classes.button}
+                  startIcon={
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={22} />
+                      ) : (
+                        <Badge badgeContent={quantity} color="secondary">
+                          <ShoppingBasket />
+                        </Badge>
+                      )}
+                    </>
+                  }
+                >
+                  Cart
+                </Button>
+              </div>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </ElevationScroll>
     </div>
   );
 }
