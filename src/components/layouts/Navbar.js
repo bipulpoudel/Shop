@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import Badge from "@material-ui/core/Badge";
+import useFetchCartQuantity from "../../hooks/useFetchCartQuantity";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const classes = useStyles();
 
+  const [quantity, loading] = useFetchCartQuantity();
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -44,9 +48,15 @@ export default function Navbar() {
                 color="inherit"
                 className={classes.button}
                 startIcon={
-                  <Badge badgeContent={4} color="secondary">
-                    <ShoppingBasket />
-                  </Badge>
+                  <>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={22} />
+                    ) : (
+                      <Badge badgeContent={quantity} color="secondary">
+                        <ShoppingBasket />
+                      </Badge>
+                    )}
+                  </>
                 }
               >
                 Cart

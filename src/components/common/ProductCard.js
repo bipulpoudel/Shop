@@ -15,12 +15,13 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 //redux imports
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addToCart,
   decreaseCartQty,
   increaseCartQty,
 } from "../../redux/actions/cartActions";
+import useFetchProductQuantity from "../../hooks/useFetchProductQuantity";
 
 const useStyles = makeStyles({
   media: {
@@ -31,12 +32,10 @@ const useStyles = makeStyles({
 export default function ProductCard({ data: { id, name, price, image } }) {
   const classes = useStyles();
 
-  const dispatch = useDispatch();
-  const { cartItems, loading } = useSelector((state) => state.cart);
+  //hook for fetching the quantity for redux store of product
+  const [quantity, loading] = useFetchProductQuantity(id);
 
-  const quantity = cartItems?.find((item) => item.id === id)
-    ? cartItems.find((item) => item.id === id).quantity
-    : 0;
+  const dispatch = useDispatch();
 
   const addToCartHandler = () => {
     let product = {
