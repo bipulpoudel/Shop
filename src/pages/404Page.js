@@ -1,14 +1,7 @@
 import React from "react";
-
-import { Link } from "react-router-dom";
-
-import { Fab, Box } from "@material-ui/core";
-
-import { Home as HomeIcon } from "@material-ui/icons";
-
 import EmptyState from "../components/common/EmptyState";
-
 import { ReactComponent as NotFoundIllustration } from "../assets/svg/not-found.svg";
+import ButtonLink from "../components/common/ButtonLink";
 
 const Error404Page = () => {
   return (
@@ -17,12 +10,9 @@ const Error404Page = () => {
       title="Page doesn’t exist."
       description="The page you’re trying to access doesn’t exist."
       button={
-        <Fab variant="extended" color="primary" component={Link} to="/">
-          <Box clone mr={1}>
-            <HomeIcon />
-          </Box>
-          Home
-        </Fab>
+        <ButtonLink color="secondary" href="/">
+          Go to Home
+        </ButtonLink>
       }
     />
   );
