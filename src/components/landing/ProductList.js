@@ -10,7 +10,7 @@ import { products } from "../../data";
 
 export default function ProductList() {
   return (
-    <Card elevation={1}>
+    <Card variant="outlined" square>
       <CardHeader
         action={
           <Button color="secondary" variant="contained">

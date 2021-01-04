@@ -9,12 +9,15 @@ import LandingPage from "./pages/Landing";
 import Error404Page from "./pages/404Page";
 import AuthLayoutRoute from "./routes/AuthLayoutRoute";
 import LoginPage from "./pages/auth/Login";
+import CartPage from "./pages/Cart";
 
 export default function App() {
   return (
     <Router>
       <Switch>
         <MainLayoutRoute exact path="/" component={LandingPage} />
+
+        <MainLayoutRoute exact path="/cart" component={CartPage} />
 
         <AuthLayoutRoute exact path="/auth/login" component={LoginPage} />
 

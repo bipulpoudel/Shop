@@ -3,13 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import Badge from "@material-ui/core/Badge";
 import useFetchCartQuantity from "../../hooks/useFetchCartQuantity";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ElevationScroll from "./ElevationScroll";
+import ButtonLink from "../common/ButtonLink";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,16 +43,17 @@ export default function Navbar(props) {
                 Ecommerce
               </Typography>
               <div className={classes.buttonGroup}>
-                <Button
+                <ButtonLink
                   color="secondary"
                   variant="contained"
                   href="/auth/login"
                 >
                   Login
-                </Button>
-                <Button
+                </ButtonLink>
+                <ButtonLink
                   color="inherit"
-                  className={classes.button}
+                  variant="text"
+                  href="/cart"
                   startIcon={
                     <>
                       {loading ? (
@@ -66,7 +67,7 @@ export default function Navbar(props) {
                   }
                 >
                   Cart
-                </Button>
+                </ButtonLink>
               </div>
             </Toolbar>
           </Container>
