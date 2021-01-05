@@ -44,4 +44,9 @@ export const removeItem = (productId) => (dispatch) => {
     type: REMOVE_CART_ITEM,
     payload: productId,
   });
+
+  //to remove all the previous toast if exists
+  toast.dismiss();
+
+  toast.info("Item removed from cart!");
 };

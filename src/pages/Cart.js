@@ -41,7 +41,7 @@ const CartPage = () => {
               <Divider />
               <CardContent>
                 {data?.map((product, index) => (
-                  <CartItem key={index} />
+                  <CartItem key={index} data={product} />
                 ))}
               </CardContent>
             </Card>

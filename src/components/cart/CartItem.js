@@ -1,48 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import ConfirmDialog from "../common/ConfirmDialog";
 
-//icon imports
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
+//redux imports
+import { useDispatch } from "react-redux";
+import { removeItem } from "../../redux/actions/cartActions";
+import CartButton from "../common/CartButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
+    display: "flex",
   },
-  image: { height: 100, marginBottom: 5, width: 100 },
+  image: { height: 100, marginBottom: theme.spacing(1), width: 100 },
+  imgWrapper: {
+    marginRight: theme.spacing(2),
+  },
 }));
 
-const CartItem = () => {
+const CartItem = ({ data }) => {
+  const { id, name, price, image } = data;
+
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [showDialog, setShowDialog] = useState(false);
+
+  const removeItemHandler = () => {
+    dispatch(removeItem(id));
+  };
 
   return (
     <>
-      <Grid container spacing={1} className={classes.root}>
-        <Grid item md={3}>
-          <img
-            src="https://source.unsplash.com/random"
-            className={classes.image}
-            alt="Product"
-          />
-          <ButtonGroup
-            size="small"
-            color="secondary"
-            variant="contained"
-            aria-label="small outlined button group"
-          >
-            <Button startIcon={<AddIcon />} />
-            <Button>2</Button>
-            <Button startIcon={<RemoveIcon />} />
-          </ButtonGroup>
-        </Grid>
-        <Grid item md={9}>
+      <div className={classes.root}>
+        <div className={classes.imgWrapper}>
+          <div>
+            <img src={image} className={classes.image} alt="Product" />
+          </div>
+          <CartButton data={data} />
+        </div>
+        <div>
           <Typography variant="h6" gutterBottom>
-            Product 1
+            {name}
           </Typography>
           <Typography variant="caption" display="block" gutterBottom>
             Category
@@ -51,13 +52,24 @@ const CartItem = () => {
             Shop Name
           </Typography>
           <Typography variant="subtitle2" gutterBottom>
-            Rs 199 /-
+            Rs {price} /-
           </Typography>
 
-          <Button color="secondary">REMOVE</Button>
-        </Grid>
-      </Grid>
+          <Button color="secondary" onClick={() => setShowDialog(true)}>
+            REMOVE
+          </Button>
+        </div>
+      </div>
       <Divider />
+      <ConfirmDialog
+        show={showDialog}
+        handleAgree={removeItemHandler}
+        handleCancel={() => setShowDialog(false)}
+        handleClose={() => setShowDialog(false)}
+        title="Remove Item"
+        agreeButtonText="Remove"
+        description="Are you sure you want to remove this item?"
+      />
     </>
   );
 };
