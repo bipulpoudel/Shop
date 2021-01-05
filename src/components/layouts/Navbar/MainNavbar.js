@@ -6,10 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import Badge from "@material-ui/core/Badge";
-import useFetchCartQuantity from "../../hooks/useFetchCartQuantity";
+import useFetchCartQuantity from "../../../hooks/useFetchCartQuantity";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import ElevationScroll from "./ElevationScroll";
-import ButtonLink from "../common/ButtonLink";
+import ElevationScroll from "../ElevationScroll";
+import ButtonLink from "../../common/ButtonLink";
 
 const useStyles = makeStyles((theme) => ({
   root: {

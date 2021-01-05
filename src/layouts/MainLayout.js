@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import Navbar from "../components/layouts/Navbar";
+import Navbar from "../components/layouts/Navbar/MainNavbar";
 
 const MainLayout = ({ children }) => {
   return (

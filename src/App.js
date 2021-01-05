@@ -10,6 +10,7 @@ import Error404Page from "./pages/404Page";
 import AuthLayoutRoute from "./routes/AuthLayoutRoute";
 import LoginPage from "./pages/auth/Login";
 import CartPage from "./pages/Cart";
+import AdminLayoutRoute from "./routes/AdminLayoutRoute";
 
 export default function App() {
   return (
@@ -20,6 +21,8 @@ export default function App() {
         <MainLayoutRoute exact path="/cart" component={CartPage} />
 
         <AuthLayoutRoute exact path="/auth/login" component={LoginPage} />
+
+        <AdminLayoutRoute exact path="/admin" component={LoginPage} />
 
         <Route component={Error404Page} />
       </Switch>
