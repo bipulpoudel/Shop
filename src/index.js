@@ -19,17 +19,7 @@ ReactDOM.render(
       <CssBaseline />
       <App />
     </ThemeProvider>
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-    />
+    <ToastContainer position="top-right" autoClose={5000} />
   </Provider>,
   document.querySelector("#root")
 );
