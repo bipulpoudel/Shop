@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 export default function ProductCard({ data }) {
   const classes = useStyles();
 
-  const { id, name, price, image } = data;
+  const { name, price, image } = data;
 
   return (
     <Card elevation={4}>
