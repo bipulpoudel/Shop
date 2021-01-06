@@ -3,14 +3,15 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //layout routes Imports
 import MainLayoutRoute from "./routes/MainLayoutRoute";
+import AdminLayoutRoute from "./routes/AdminLayoutRoute";
+import AuthLayoutRoute from "./routes/AuthLayoutRoute";
 
 //Pages Imports
-import LandingPage from "./pages/Landing";
-import Error404Page from "./pages/404Page";
-import AuthLayoutRoute from "./routes/AuthLayoutRoute";
-import LoginPage from "./pages/auth/Login";
-import CartPage from "./pages/Cart";
-import AdminLayoutRoute from "./routes/AdminLayoutRoute";
+import LandingPage from "./pages/landing";
+import Error404Page from "./pages/404page";
+import LoginPage from "./pages/auth/login";
+import CartPage from "./pages/cart";
+import Category from "./pages/category";
 
 export default function App() {
   return (
@@ -22,7 +23,9 @@ export default function App() {
 
         <AuthLayoutRoute exact path="/auth/login" component={LoginPage} />
 
-        <AdminLayoutRoute exact path="/admin" component={LoginPage} />
+        <AdminLayoutRoute exact path="/admin/dashboard" component={LoginPage} />
+
+        <AdminLayoutRoute exact path="/admin/categories" component={Category} />
 
         <Route component={Error404Page} />
       </Switch>
